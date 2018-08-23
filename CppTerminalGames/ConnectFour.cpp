@@ -193,6 +193,9 @@ bool CtFr::WinCheck(int move) {
 				numInLine = numInLine + 1;
 				curSpotCheck = curSpotCheck - CtFr::NUM_COLS;
 			}
+			if (numInLine == CtFr::NUM_IN_ROW_TO_WIN) {
+				winOccured = true;
+			}
 		}
 	}
 

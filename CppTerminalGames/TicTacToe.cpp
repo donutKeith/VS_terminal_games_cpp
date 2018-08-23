@@ -266,7 +266,7 @@ bool TTT::CheckCols() {
 // -----------------------------------------------------------------------------------------------
 
 bool TTT::CheckDiags() {
-	bool winnerFoundOnDiag;
+	bool winnerFoundOnDiag = false;
 	char middle = TTT::marks[4];// Both diagonals need the middle to win so we will check the corners against the middle to determine victory
 
 								// We do not need to check anything if the middle is empty
