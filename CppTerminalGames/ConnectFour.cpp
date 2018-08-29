@@ -60,32 +60,40 @@ int CtFr::GetPlayerChoice(int player) {
 		cout << endl;
 
 		// Get the player's choice
-		cin >> choice;
+		if (cin >> choice) {
 
-		//Check if the player's choice was valid ------------------------------------------
-		// Did the user pick a valid column (aka a column that exists))
-		if (choice < 0 || choice >= CtFr::NUM_COLS) {
-			cout << "Invalid Column Choice Please select again!" << endl;
-		}
-		// Did the user pick a full column
-		else if (CtFr::botPos[choice] == CtFr::FULL_COL) {
-			cout << "That column is full please choose another column" << endl;
-		}
-		// If none of the above are true then it is a valid column and we can continue
-		else {
-			// Determine what player is making the choice
-			pos = CtFr::botPos[choice];
-			if (player == 0) {
-				CtFr::marks[pos] = player1Mark;
+			//Check if the player's choice was valid ------------------------------------------
+			// Did the user pick a valid column (aka a column that exists))
+			if (choice < 0 || choice >= CtFr::NUM_COLS) {
+				cout << "Invalid Column Choice Please select again!" << endl;
 			}
+			// Did the user pick a full column
+			else if (CtFr::botPos[choice] == CtFr::FULL_COL) {
+				cout << "That column is full please choose another column" << endl;
+			}
+			else if (!isdigit(choice)) {
+				cout << "You did not enter a number" << endl;
+			}
+			// If none of the above are true then it is a valid column and we can continue
 			else {
-				CtFr::marks[pos] = player2Mark;
-			}
+				// Determine what player is making the choice
+				pos = CtFr::botPos[choice];
+				if (player == 0) {
+					CtFr::marks[pos] = player1Mark;
+				}
+				else {
+					CtFr::marks[pos] = player2Mark;
+				}
 
-			CtFr::UpdateCol(choice);
-			validChoice = true;
+				CtFr::UpdateCol(choice);
+				validChoice = true;
+			}
 		}
-		// --------------------------------------------------------------------------------
+		else {
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+			// --------------------------------------------------------------------------------
 	}
 	return pos;
 }
